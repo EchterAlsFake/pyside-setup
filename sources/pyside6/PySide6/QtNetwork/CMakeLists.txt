@@ -49,8 +49,6 @@ ${QtNetwork_GEN_DIR}/qrestreply_wrapper.cpp
 ${QtNetwork_GEN_DIR}/qssl_wrapper.cpp
 ${QtNetwork_GEN_DIR}/qsslcertificate_wrapper.cpp
 ${QtNetwork_GEN_DIR}/qsslcertificateextension_wrapper.cpp
-${QtNetwork_GEN_DIR}/qsslellipticcurve_wrapper.cpp
-${QtNetwork_GEN_DIR}/qsslkeyingmaterial_wrapper.cpp
 ${QtNetwork_GEN_DIR}/qtcpserver_wrapper.cpp
 ${QtNetwork_GEN_DIR}/qtcpsocket_wrapper.cpp
 ${QtNetwork_GEN_DIR}/qudpsocket_wrapper.cpp
@@ -64,12 +62,15 @@ get_property(QtNetwork_disabled_features TARGET Qt${QT_MAJOR_VERSION}::Network
 if("ssl" IN_LIST QtNetwork_disabled_features)
     list(APPEND QtNetwork_DROPPED_ENTRIES QOcspResponse QSslCipher
          QSslConfiguration QSslDiffieHellmanParameters QSslError
-         QSslKey QSslPreSharedKeyAuthenticator QSslSocket QSslServer)
+         QSslKey QSslPreSharedKeyAuthenticator QSslSocket QSslServer
+         QSslKeyingMaterial)
     message(STATUS "Qt${QT_MAJOR_VERSION}Network: Dropping SSL classes")
 else()
     # Problems with operator==(QSslEllipticCurve,QSslEllipticCurve)
     # check_qt_class(QtNetwork QSslEllipticCurve QtNetwork_OPTIONAL_SRC QtNetwork_DROPPED_ENTRIES)
     list(APPEND QtNetwork_SRC
+         ${QtNetwork_GEN_DIR}/qsslellipticcurve_wrapper.cpp
+         ${QtNetwork_GEN_DIR}/qsslkeyingmaterial_wrapper.cpp
          ${QtNetwork_GEN_DIR}/qsslcipher_wrapper.cpp
          ${QtNetwork_GEN_DIR}/qsslconfiguration_wrapper.cpp
          ${QtNetwork_GEN_DIR}/qssldiffiehellmanparameters_wrapper.cpp
