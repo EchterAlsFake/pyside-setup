@@ -2,6 +2,9 @@
 # Copyright (C) 2023 The Qt Company Ltd.
 # SPDX-License-Identifier: LicenseRef-Qt-Commercial OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
 set -x -e
+export PATH={{ host_python_dir }}:$PATH
+# Do not let configure enable target modules using host pkg-config metadata.
+export PKG_CONFIG=/bin/false
 export HOST_ARCH={{ plat_name }}-linux-android
 export TOOLCHAIN={{ ndk_path }}/toolchains/llvm/prebuilt/{{ host_platform_name }}-x86_64/bin
 export TOOL_PREFIX=$TOOLCHAIN/$HOST_ARCH
@@ -26,4 +29,4 @@ export CFLAGS='-fPIC -DANDROID'
 ac_cv_little_endian_double=yes
 make BLDSHARED="$CC -shared" CROSS-COMPILE=$TOOL_PREFIX- CROSS_COMPILE_TARGET=yes \
 INSTSONAME=libpython{{ python_version }}.so
-make install prefix={{ android_py_install_path_prefix }}/Python-$HOST_ARCH/_install
+make install prefix={{ android_py_install_path }}

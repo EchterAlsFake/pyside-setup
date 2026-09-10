@@ -319,11 +319,10 @@ macro(shiboken_find_required_python)
         # certain scenarios eg: armv7a target, macOS host etc. This is because
         # it is unable to set Python_CONFIG i.e. `python3-config` script
         # This workaround sets the Python_SOABI manually for this Android platform.
-        # This needs to be updated manually if the Python version for Android cross compilation
-        # changes.
-        # TODO: Find a better way to set Python_SOABI for Android platform
+        # FindPython still provides the requested target major/minor version, so
+        # do not couple this fallback to one hard-coded CPython release.
         if(CMAKE_SYSTEM_NAME STREQUAL "Android" AND NOT Python_SOABI)
-            set(Python_SOABI "cpython-311")
+            set(Python_SOABI "cpython-${Python_VERSION_MAJOR}${Python_VERSION_MINOR}")
         endif()
     else()
         find_package(
