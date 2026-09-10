@@ -1,5 +1,13 @@
 # Qt For Python
 
+> [!IMPORTANT]
+> This is the `pyside-setup-android` fork. Its
+> `android-cross-build-fixes` branch tracks an upstream Qt for Python release
+> and carries focused Android cross-build fixes, including multi-version
+> CPython support. See the
+> [Android helper documentation](tools/cross_compile_android/README.md) for the
+> tested matrix, usage, limitations, and maintenance policy.
+
 Qt For Python is the [Python Qt bindings project](https://wiki.qt.io/Qt_for_Python),
 providing access to the complete Qt framework as well as to generator tools for
 rapidly generating bindings for any C++ libraries.
