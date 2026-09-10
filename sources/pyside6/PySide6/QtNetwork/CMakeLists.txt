@@ -50,7 +50,6 @@ ${QtNetwork_GEN_DIR}/qrestreply_wrapper.cpp
 ${QtNetwork_GEN_DIR}/qssl_wrapper.cpp
 ${QtNetwork_GEN_DIR}/qsslcertificate_wrapper.cpp
 ${QtNetwork_GEN_DIR}/qsslcertificateextension_wrapper.cpp
-${QtNetwork_GEN_DIR}/qsslellipticcurve_wrapper.cpp
 ${QtNetwork_GEN_DIR}/qtcpserver_wrapper.cpp
 ${QtNetwork_GEN_DIR}/qtcpsocket_wrapper.cpp
 ${QtNetwork_GEN_DIR}/qudpsocket_wrapper.cpp
@@ -70,6 +69,7 @@ else()
     # Problems with operator==(QSslEllipticCurve,QSslEllipticCurve)
     # check_qt_class(QtNetwork QSslEllipticCurve QtNetwork_OPTIONAL_SRC QtNetwork_DROPPED_ENTRIES)
     list(APPEND QtNetwork_SRC
+         ${QtNetwork_GEN_DIR}/qsslellipticcurve_wrapper.cpp
          ${QtNetwork_GEN_DIR}/qsslcipher_wrapper.cpp
          ${QtNetwork_GEN_DIR}/qsslconfiguration_wrapper.cpp
          ${QtNetwork_GEN_DIR}/qssldiffiehellmanparameters_wrapper.cpp
