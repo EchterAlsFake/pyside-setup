@@ -43,7 +43,9 @@ set(QT_COMPILER_FLAGS_RELEASE "-O2 -pipe")
 # set(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE)
 # set(CMAKE_INSTALL_RPATH "$ORIGIN")
 
-set(QT_LINKER_FLAGS "-Wl,-O1 -Wl,--hash-style=gnu -Wl,-rpath='$ORIGIN' -Wl,-rpath='$ORIGIN/Qt/lib' \
+set(QT_LINKER_FLAGS "-Wl,-O1 -Wl,-z,max-page-size=16384 \
+                     -Wl,-z,common-page-size=16384 \
+                     -Wl,--hash-style=gnu -Wl,-rpath='$ORIGIN' -Wl,-rpath='$ORIGIN/Qt/lib' \
                      -Wl,--as-needed -L{{ qt_install_path }}/android_{{ qt_plat_name }}/lib \
                      -L{{ qt_install_path }}/android_{{ qt_plat_name }}/plugins/platforms \
                      -L{{ target_python_path }}/lib \
