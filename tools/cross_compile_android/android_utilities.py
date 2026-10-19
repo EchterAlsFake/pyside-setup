@@ -20,11 +20,9 @@ from tqdm import tqdm
 
 # the tag number does not matter much since we update the sdk later
 DEFAULT_SDK_TAG = 14742923
-# r28c is the first NDK whose Clang defaults to 16 KB page-aligned LOAD
-# segments, which recent Android versions require. Everything p4a builds
-# itself (libpython, libsqlite3, libssl, libffi) picks up that default;
-# those come from p4a's own autotools recipes, which we cannot pass
-# linker flags to. Note Qt documents r27c for its own Android libraries.
+# r28 enables 16 KiB alignment by default for 64-bit Android targets.
+# Pin r28c for both wheel compilation and pyside6-android-deploy (which
+# imports this module). Qt's prebuilt libraries may still use r27c.
 ANDROID_NDK_VERSION = "28c"
 
 # CPython supports only these two Android ABIs. See HOSTS in CPython's

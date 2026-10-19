@@ -17,7 +17,8 @@ from tqdm import tqdm
 from jinja2 import Environment, FileSystemLoader
 
 from android_utilities import (run_command, download_android_commandlinetools,
-                               download_android_ndk, install_android_packages)
+                               download_android_ndk, install_android_packages,
+                               ANDROID_NDK_VERSION)
 
 # The host interpreter must have the same major/minor version and OpenSSL support.
 DEFAULT_PYTHON_VERSION = "3.11"
@@ -129,7 +130,8 @@ if __name__ == "__main__":
         type=Path,
         help="Cache directory (default: ~/.pyside6_android_deploy)",
     )
-    parser.add_argument("--ndk-path", type=str, help="Path to Android NDK (preferred r27c)")
+    parser.add_argument("--ndk-path", type=str,
+                        help=f"Path to Android NDK (default download: r{ANDROID_NDK_VERSION})")
     # sdk path is needed to compile all the Qt Java Acitivity files into Qt6AndroidBindings.jar
     parser.add_argument("--sdk-path", type=str, help="Path to Android SDK")
     parser.add_argument(
@@ -284,6 +286,9 @@ if __name__ == "__main__":
 
     ndk_path = str(Path(ndk_path).expanduser().resolve())
     sdk_path = str(Path(sdk_path).expanduser().resolve())
+    # Java bindings must use the SDK API, independently of the native API
+    # selected by --api-level for Python and the C++ bindings.
+    os.environ["ANDROID_API_VERSION"] = f"android-{sdk_api_level}"
 
     ndk_toolchain_bin = (
         Path(ndk_path)

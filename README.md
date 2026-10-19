@@ -8,6 +8,10 @@ Shiboken is the generator used to build the bindings.
 
 See README.pyside6.md and README.shiboken6.md for details.
 
+This fork's Android build and deployment default is **NDK r28c**
+(`28.2.13676358`). See the [Android build instructions](tools/cross_compile_android/README.md)
+for the Qt 6.12.0 source-build workflow and migration notes.
+
 ## Building
 
 To build both Shiboken and PySide simply execute:
